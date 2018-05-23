@@ -1,29 +1,13 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import calendar from './data/calendar';
-
-import { Calendar } from './styles/calendar';
-import { MonthContainer, Month, MonthHeader } from './styles/calendar/month';
-import { Week } from './styles/calendar/week';
-import { Day, DayContainer } from './styles/calendar/day';
+import Calendar from './containers/calendar';
 
 export default () => (
-  <Calendar>
-    {calendar.months.map(month => (
-      <MonthContainer key={month.id}>
-        <Month>
-          <MonthHeader>{month.name}</MonthHeader>
-          {month.weeks.map(week => (
-            <Week key={week.id}>
-              {week.days.map(day => (
-                <DayContainer key={day.id}>
-                  <Day>{day.id}</Day>
-                </DayContainer>
-              ))}
-            </Week>
-          ))}
-        </Month>
-      </MonthContainer>
-    ))}
-  </Calendar>
+  <Router>
+    <Switch>
+      <Route path="/" exact component={Calendar} />
+      <Route path="/:year" component={Calendar} />
+    </Switch>
+  </Router>
 );
