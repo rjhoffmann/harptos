@@ -1,3 +1,5 @@
+// TODO: Shieldmeet leapyear, every 4 years; 0DR and every fourth year prior and afterward.
+
 export default [
   { year: '-700', name: 'The Year of Twelve Gods' },
   { year: '-699', name: 'The Year of Moon Blades Clashing ' },

@@ -1,7 +1,6 @@
 import React from 'react';
-import { times } from 'lodash';
 
-import months from './data/months';
+import calendar from './data/calendar';
 
 import { Calendar } from './styles/calendar';
 import { MonthContainer, Month, MonthHeader } from './styles/calendar/month';
@@ -10,22 +9,20 @@ import { Day, DayContainer } from './styles/calendar/day';
 
 export default () => (
   <Calendar>
-    {months.map(month => (
+    {calendar.months.map(month => (
       <MonthContainer key={month.id}>
-        <MonthHeader>{month.name}</MonthHeader>
-        {times(3, weekNumber => (
-          <Week key={weekNumber}>
-            {times(10, d => {
-              const dayNumber = d+(weekNumber*10)+1;
-              
-              return (
-                <DayContainer key={dayNumber}>
-                  <Day>{dayNumber}</Day>
+        <Month>
+          <MonthHeader>{month.name}</MonthHeader>
+          {month.weeks.map(week => (
+            <Week key={week.id}>
+              {week.days.map(day => (
+                <DayContainer key={day.id}>
+                  <Day>{day.id}</Day>
                 </DayContainer>
-              )
-            })}
-          </Week>
-        ))}
+              ))}
+            </Week>
+          ))}
+        </Month>
       </MonthContainer>
     ))}
   </Calendar>
