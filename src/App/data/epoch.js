@@ -1,28 +1,24 @@
+import _floor from 'lodash/floor';
 import _reduce from 'lodash/reduce';
 
 import calendar from './calendar';
 
-// Accumulator function over months, return the total minutes to the beginning
-// of the year. If a month contains a holiday, add an additional days worth of minutes.
-// If the year is a leap year and the month is after the 7th month (Flamerule), add an 
-// additional day for Shieldmeet.
-const monthEpoch = (month, isLeapYear) => _reduce(calendar.months, (totalMinutes, m) => {
-  let acc = 0;
+const yearEpoch = year => (year * 525600) + (_floor(year / 4) * 1440);
 
+const monthEpoch = (month, year) => _reduce(calendar.months, (sum, m) => {
+  let monthMinutes = 0;
   if(m.id < month) {
-    acc += m.id === 7 ? 1440 : 0;
-    acc += m.holiday !== null ? 44640 : 43200;
+    monthMinutes += month.holiday ? 44640 : 43200;
+
+    if(m.id === 7 && year % 4 === 0) {
+      monthMinutes += 1440;
+    }
   }
-  
-  return totalMinutes + acc;
+  return monthMinutes + sum;
 }, 0);
 
-// Minutes since 0DR
-export default (year, month, day) => {
-  const monthMinutes = monthEpoch(month, year % 4 === 0);
-  const dayMinutes = (day - 1) * 1440;
-  // const yearMinutes = (year - 1) * 9;
+const dayEpoch = day => day * 1440;
 
-  // TODO
-  return null;
+export const epoch = (year, month, day) => {
+  return yearEpoch(year) + monthEpoch(month, year) + dayEpoch(day);
 };

@@ -4,6 +4,8 @@ import _find from 'lodash/find';
 import calendar from '../../data/calendar';
 import years from '../../data/years';
 
+import Selune from '../../components/selune';
+
 import { Calendar } from '../../styles/calendar';
 import { MonthContainer, Month, MonthHeader } from '../../styles/calendar/month';
 import { Week } from '../../styles/calendar/week';
@@ -29,7 +31,10 @@ export default ({ match }) => {
               <Week key={week.id}>
                 {week.days.map(day => (
                   <DayContainer key={day.id}>
-                    <Day>{day.id}</Day>
+                    <Day>
+                      {day.id}
+                      <Selune year={year} month={month.id} day={day.id} />
+                    </Day>
                   </DayContainer>
                 ))}
               </Week>
