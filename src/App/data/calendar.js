@@ -1,16 +1,16 @@
-import hammer from './months/hammer';
-import alturiak from './months/alturiak';
-import ches from './months/ches';
-import tarsakh from './months/tarsakh';
-import mirtul from './months/mirtul';
-import kythorn from './months/kythorn';
-import flamerule from './months/flamerule';
-import eleasis from './months/eleasis';
-import eleint from './months/eleint';
-import marpenoth from './months/marpenoth';
-import uktar from './months/uktar';
-import nightal from './months/nightal';
+import _map from 'lodash/map';
+import _times from 'lodash/times';
+
+import months from './months';
 
 export default {
-  months: [hammer, alturiak, ches, tarsakh, mirtul, kythorn, flamerule, eleasis, eleint, marpenoth, uktar, nightal]
+  months: _map(months, month => ({
+    ...month,
+    weeks: _times(3, week => ({
+      id: week,
+      days: _times(10, day => ({
+        id: day+(week*10)+1,
+      })),
+    })),
+  })),
 };

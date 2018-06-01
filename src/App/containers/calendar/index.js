@@ -17,6 +17,8 @@ export default ({ match }) => {
     year: parseInt((match.params.year || 1493), 10)
   });
 
+  console.log(calendar);
+
   // Every 4 years is a leap year for this calendar.
   const isLeapYear = year%4 === 0;
 
@@ -40,6 +42,16 @@ export default ({ match }) => {
               </Week>
             ))}
           </Month>
+          {month.holiday && <div>
+            <span>{month.holiday.name}</span>
+            <Selune year={year} month={month.id} day={31} />
+          </div>}
+          {isLeapYear && month.id === 7 &&
+            <div>
+              <span>Shieldmeet</span>
+              <Selune year={year} month={month.id} day={32} />
+            </div>
+          }
         </MonthContainer>
       ))}
     </Calendar>
