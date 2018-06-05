@@ -11,4 +11,4 @@ export const rally = createMuiTheme({
       main: grey['800']
     }
   }
-})
+});
