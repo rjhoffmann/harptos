@@ -1,9 +1,12 @@
 import React from 'react';
 import _find from 'lodash/find';
 
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import { rally } from '../../styles/theme';
 
 import calendar from '../../data/calendar';
 import years from '../../data/years';
@@ -22,7 +25,7 @@ class Calendar extends React.Component {
     const { year, name: yearName } = this.state.year;
 
     return (
-      <div>
+      <MuiThemeProvider theme={rally}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -30,7 +33,7 @@ class Calendar extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-      </div>
+      </MuiThemeProvider>
     )
   }
 };
