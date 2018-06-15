@@ -7,6 +7,7 @@ import calendar from '../../data/calendar';
 import years from '../../data/years';
 
 import Bar from '../../components/bar';
+import Months from '../../components/month/month-container';
 
 export default ({ match }) => {
   const { year:yearParam = 1493, month:monthParam = 1 } = match.params;
@@ -17,6 +18,7 @@ export default ({ match }) => {
   return (
     <MuiThemeProvider theme={rally}>
       <Bar year={year} month={month} />
+      <Months months={calendar.months} />
     </MuiThemeProvider>
   )
 };
